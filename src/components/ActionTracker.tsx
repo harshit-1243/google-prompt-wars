@@ -90,9 +90,13 @@ export default function ActionTracker({
                   <span className="flex flex-wrap items-center gap-2 font-medium text-foreground">
                     {action.title}
                     <span
-                      className="rounded-full px-2 py-0.5 text-xs font-medium"
-                      style={{ backgroundColor: `${meta.color}22`, color: meta.color }}
+                      className="flex items-center gap-1 rounded-full bg-track px-2 py-0.5 text-xs font-semibold text-foreground"
                     >
+                      <span
+                        className="inline-block h-2 w-2 rounded-full"
+                        style={{ backgroundColor: meta.color }}
+                        aria-hidden="true"
+                      />
                       −{action.savingsKg} kg/yr
                     </span>
                   </span>

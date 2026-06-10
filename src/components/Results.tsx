@@ -23,7 +23,7 @@ function ComparisonBar({
         <span className="font-medium text-foreground">{label}</span>
         <span
           className={`font-semibold tabular-nums ${
-            over ? "text-danger" : "text-brand"
+            over ? "text-danger" : "text-brand-dark"
           }`}
         >
           {ratio.toFixed(1)}×
@@ -47,7 +47,7 @@ function ComparisonBar({
 export default function Results({ result }: ResultsProps) {
   const verdict =
     result.totalTonnes <= 2.3
-      ? { text: "On track for 1.5°C — brilliant!", tone: "text-brand" }
+      ? { text: "On track for 1.5°C — brilliant!", tone: "text-brand-dark" }
       : result.totalTonnes <= 4.7
         ? { text: "Below the global average, but above the 1.5°C target.", tone: "text-warn" }
         : { text: "Above the global average — plenty of room to cut.", tone: "text-danger" };

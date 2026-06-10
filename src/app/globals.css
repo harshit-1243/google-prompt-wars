@@ -8,8 +8,9 @@
   --color-line: #e1e8e3;
   --color-track: #e8efe9;
   --color-brand: #16a34a;
-  --color-brand-dark: #15803d;
-  --color-danger: #dc2626;
+  /* brand-dark passes WCAG AA (≈5.9:1) for text on light surfaces. */
+  --color-brand-dark: #166534;
+  --color-danger: #b91c1c;
   --color-warn: #b45309;
   --font-sans: var(--font-geist-sans);
 }
