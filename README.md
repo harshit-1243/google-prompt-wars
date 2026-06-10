@@ -17,8 +17,16 @@ real-world equivalents, and gives you AI-personalised ways to cut it.
 | 🧭 | **Awareness layer** — compares you to the 1.5°C target, India average & global average | *Understand* |
 | 🌳 | **Real-world equivalencies** — "= X trees / Y km driven / Z flights" | *Understand* |
 | ✨ | **Gemini-powered insights** — personalised, educational guidance via Google Gemini | *Personalised insights* |
+| 💬 | **Ask EcoTrace** — grounded Gemini Q&A that answers your climate questions using your footprint as context | *Personalised insights* |
 | 🎯 | **Action tracker** — pick simple actions, watch your projected footprint drop, saved on-device | *Reduce through simple actions* |
 | 📈 | **Progress tracking** — save monthly snapshots, see a trend sparkline and your change vs. last time | *Track over time* |
+
+## 🔵 Google services used
+
+- **Google Gemini** (`gemini-2.5-flash` via `@google/genai`) powers **two** features:
+  the personalised insights generator (`/api/insights`, with structured JSON
+  output) and the grounded **Ask EcoTrace** Q&A (`/api/explain`).
+- **Google Fonts** (Geist) self-hosted via `next/font/google`.
 
 ## 🧱 Tech stack
 
@@ -52,12 +60,22 @@ covered by unit tests (`src/lib/emissions.test.ts`).
 
 ## 🔐 Security & privacy
 
-- The **Gemini API key is read server-side only** (`/api/insights`) and never
-  shipped to the browser.
-- The insights route performs **strict input validation** (types + enums) and is
-  **rate-limited** (429 after 10 requests/min per client) to guard the AI endpoint.
+- The **Gemini API key is read server-side only** and never shipped to the browser.
+- Both AI routes perform **strict input validation** (types + enums, length-capped
+  questions) and are **rate-limited** (429 after 10 requests/min per client).
+- **HTTP security headers** on every response: Content-Security-Policy,
+  `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, Referrer-Policy,
+  Permissions-Policy, HSTS. `X-Powered-By` is disabled.
+- `npm audit` is **clean (0 vulnerabilities)**.
 - All user data stays **on the user's device** (`localStorage`) — no database,
   no accounts, no tracking.
+
+## ✅ Quality automation
+
+A **GitHub Actions CI** workflow (`.github/workflows/ci.yml`) runs lint, the full
+test suite, `npm audit`, and a production build on every push and PR.
+**61 tests** cover the calculation engine, validation, rate limiting, history,
+and React components (including **axe** accessibility checks).
 
 ## 📁 Project structure
 

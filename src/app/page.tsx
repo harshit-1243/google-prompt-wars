@@ -7,6 +7,7 @@ import { addSnapshot, type Snapshot } from "@/lib/history";
 import Calculator from "@/components/Calculator";
 import Results from "@/components/Results";
 import Insights from "@/components/Insights";
+import AskEcoTrace from "@/components/AskEcoTrace";
 import ActionTracker from "@/components/ActionTracker";
 import History from "@/components/History";
 
@@ -167,6 +168,8 @@ export default function Home() {
             source={insightSource}
             onGenerate={generateInsights}
           />
+
+          <AskEcoTrace input={input} />
 
           <ActionTracker
             breakdown={result.breakdown}
